@@ -88,7 +88,7 @@ void print_tree(const tree *root, std::ostream &source, size_t space)
 	if (root == nullptr) return;
 	print_tree(root->left, source, space + 1);
 	for (size_t i = 0; i < space; i++) source << '\t';
-	source << root->data[0] << endl;
+	source << root->data << endl;
 	print_tree(root->right, source, space + 1);
 }
 
@@ -184,14 +184,13 @@ tree *copy(const tree *root)
 	root_copy->data = root->data;
 	root_copy->left = copy(root->left);
 	root_copy->right = copy(root->right);
-	//root_copy->number = root->number;
 	return root_copy;
 }
 
 size_t * copy(size_t *number, size_t n)
 {
 	size_t *result = new size_t[n];
-	for (int i = 0; i < n; i++)
+	for (size_t i = 0; i < n; i++)
 		result[i] = number[i];
 	return result;
 }
@@ -223,7 +222,7 @@ void random_insert(tree *& root, const string x, tree *current)
 		{
 			root = new tree;
 
-			string t = "*1";
+			string t = "*";
 			root->data = t;
 			root->left = nullptr;
 			root->right = nullptr;
@@ -256,16 +255,29 @@ tree * random_tree(const size_t count)
 	result->right = nullptr;
 	string t;
 	if (std::rand() % 2 == 0)
-		if (std::rand() % 2 == 0)
+	//	if (std::rand() % 2 == 0)
 			t = "+";
-		else
-			t = "-";
+	//	else
+	//		t = "-";
 	else
-		if (std::rand() % 2 == 0)
+	//	if (std::rand() % 2 == 0)
 			t = "*";
-		else
-			t = "/";
+	//	else
+	//		t = "/";
 	result->data = t;
+	for (size_t i = 1; i < count; i++) {
+		if (std::rand() % 2 == 0)
+	//		if (std::rand() % 2 == 0)
+				t = "+";
+	//		else
+	//			t = "-";
+		else
+	//		if (std::rand() % 2 == 0)
+				t = "*";
+	//		else
+	//			t = "/";
+		random_insert(result, t);
+	}
 	leaves_maker(result);
 	return result;
 }
@@ -279,11 +291,11 @@ void leaves_maker(tree *&root)
 	if (root->left == nullptr && root->right == nullptr)
 	{
 		tree *p = new tree;
-		p->data = 'd';
+		p->data = "read";
 		p->left = nullptr;
 		p->right = nullptr;
 		tree *q = new tree;
-		q->data = 'd';
+		q->data = "read";
 		q->left = nullptr;
 		q->right = nullptr;
 		root->left = p;
@@ -293,7 +305,7 @@ void leaves_maker(tree *&root)
 		if (root->left == nullptr)
 		{
 			tree *p = new tree;
-			p->data = 'd';
+			p->data = "read";
 			p->left = nullptr;
 			p->right = nullptr;
 			root->left = p;
@@ -302,7 +314,7 @@ void leaves_maker(tree *&root)
 			if (root->right == nullptr)
 			{
 				tree *q = new tree;
-				q->data = 'd';
+				q->data = "read";
 				q->left = nullptr;
 				q->right = nullptr;
 
@@ -319,11 +331,11 @@ void leaves_maker(tree *& root, const string mark, size_t count)
 	if (root->left == nullptr && root->right == nullptr)
 	{
 		tree *p = new tree;
-		p->data = 'd' + mark + int_to_string(count++);
+		p->data = "read";
 		p->left = nullptr;
 		p->right = nullptr;
 		tree *q = new tree;
-		q->data = 'd' + mark + int_to_string(count++);
+		q->data = "read";
 		q->left = nullptr;
 		q->right = nullptr;
 		root->left = p;
@@ -333,7 +345,7 @@ void leaves_maker(tree *& root, const string mark, size_t count)
 		if (root->left == nullptr)
 		{
 			tree *p = new tree;
-			p->data = 'd' + mark + int_to_string(count++);
+			p->data = "read";
 			p->left = nullptr;
 			p->right = nullptr;
 			root->left = p;
@@ -342,7 +354,7 @@ void leaves_maker(tree *& root, const string mark, size_t count)
 			if (root->right == nullptr)
 			{
 				tree *q = new tree;
-				q->data = 'd' + mark + int_to_string(count++);
+				q->data = "read";
 				q->left = nullptr;
 				q->right = nullptr;
 
@@ -368,4 +380,15 @@ string int_to_string(size_t a)
 	}
 	str[n] = 0;
 	return str;
+}
+
+void change_tree(tree *&root, string p){
+	if (!root)
+		return;
+	change_tree(root->right, p);
+	change_tree(root->left, p);
+	if (!root->left && !root->right)
+			root->data = root->data + p;
+			
+
 }

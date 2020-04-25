@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void no_data_const()
+void no_data()
 {
 
 	//	size_t tree_size_first, tree_size_second;
@@ -35,7 +35,7 @@ void no_data_const()
 	delete_tree(second_tree);
 }
 
-void no_data() {
+void data() {
 	size_t tree_size_first, tree_size_second;
 	cout << "Ќе введены начальные данные данные." << endl <<
 		"¬ведите количество вершин дл€ создани€ дерева : ";
@@ -43,40 +43,43 @@ void no_data() {
 	if (tree_size_first < 1)
 		throw domain_error("Ќеправильно задан размер первого дерева");
 	tree *first_tree = random_tree(tree_size_first);
-	//print_tree_to_file("first_tree.txt", first_tree);
-	//print_tree__to_read("first_tree_to_read.txt", first_tree);
+	change_tree(first_tree, "1");
+	//print_tree("first_tree.txt", first_tree);
+	//print_tree_to_read("first_tree_to_read.txt", first_tree);
 	cout << "¬ведите количество вершин дл€ создани€ дерева : ";
 	cin >> tree_size_second;
 	if (tree_size_second < 1)
 		throw domain_error("Ќеправильно задан размер второго дерева");
 	tree *second_tree = random_tree(tree_size_second);
-	//print_tree_to_file("second_tree.txt", second_tree);
-	//print_tree__to_read("second_tree_to_read.txt", second_tree);
-	//if (tree_size_first + tree_size_second <= 20)
-	//{
-	//	cout << "first tree:" << endl;
-	print_number(first_tree);
-	//print_tree(first_tree);
-	//	cout << "second tree:" << endl;
-	print_number(second_tree);
-	//	//print_tree(second_tree);
-	//}
+	change_tree(second_tree, "2");
+	//print_tree("second_tree.txt", second_tree);
+	//print_tree_to_read("second_tree_to_read.txt", second_tree);
+	if (tree_size_first + tree_size_second <= 50)
+	{
+		cout << "first tree:" << endl;
+	print_tree(first_tree);
+		cout << "second tree:" << endl;
+	print_tree(second_tree);
+	}
+
 	tree *result = new tree;
 	//начало отсчета времени
 	clock_t start = clock();
 	result = get_great_tree(first_tree, second_tree);
 	// конец отсчета времени
 	clock_t stop = clock();
-	/*if (tree_size_first + tree_size_second <= 20)
+	// количество секунд
+	double seconds = double(stop - start) / CLOCKS_PER_SEC;
+	if (tree_size_first + tree_size_second <= 50)
 	{
 	cout << "result" << endl;
 	print_tree(result);
-	}*/
-	// количество секунд
-	double seconds = double(stop - start) / CLOCKS_PER_SEC;
+	}
+
+	
 
 	//print_tree_to_file("out.txt", result);
-	//print_tree__to_read("out_to_read.txt", result);
+	//print_tree_to_read("out_to_read.txt", result);
 	cout << endl << "time : " << seconds << endl;
 	//print_tree_to_file("out.txt", result);
 	/*ofstream fout("out.txt", ios_base::app);
@@ -85,9 +88,9 @@ void no_data() {
 	fout << "time : " << seconds << endl;
 	fout.clear();
 	fout.close();*/
-	//delete_tree(first_tree);
-	//delete_tree(second_tree);
-	//delete_tree(result);
+	delete_tree(first_tree);
+	delete_tree(second_tree);
+	delete_tree(result);
 }
 
 

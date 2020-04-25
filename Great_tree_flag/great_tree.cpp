@@ -3,13 +3,14 @@
 tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 {
 	//Проверка корректности входных данных
-	if (left_tree == nullptr || right_tree == nullptr)
+	if (left_tree == nullptr || right_tree == nullptr || left_tree == NULL || right_tree == NULL)
 		throw "Дерево задано неправильно. Пожалуйста, проверьте входные данные.";
 
 	//Проверка корней входных деревьев
 
 	//чтение	чтение
-	if (left_tree->data == "read" && right_tree->data == "read") {
+	if (operation_in_tree.find(left_tree->data) == operation_in_tree.end()
+		&& operation_in_tree.find(right_tree->data) == operation_in_tree.end()) {
 		tree * flag = new tree;
 		flag->data = "flag";
 		flag->left = copy(left_tree);
@@ -18,33 +19,26 @@ tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 	}
 
 	//чтение	операция
-	if (left_tree->data == "read") {
+	if (operation_in_tree.find(left_tree->data) == operation_in_tree.end()) {
 		tree * result = new tree;
 		result->data = right_tree->data;
 
-		result->left = build_flag(right_tree->left, left_tree->data);
+		result->left = build_flag(left_tree->data, right_tree->left);
 
-		if (right_tree->data == "*") {
-			result->right = build_flag(right_tree->right, "1");
-			return result;
-		}
-
-		if (right_tree->data == "+") {
-			result->right = build_flag(right_tree->right, "0");
-			return result;
-		}
+		result->right = build_flag(get_constant(right_tree->data), right_tree->right);
+		return result;
 
 		throw "Ошибка в создании флага. Неверная операция в корне дерева.";
 	}
 
 	//операция	чтение
-	if (right_tree->data == "read") {
+	if (operation_in_tree.find(right_tree->data) == operation_in_tree.end()) {
 		tree * result = new tree;
 		result->data = left_tree->data;
 
-		result->left = build_flag(right_tree->data, left_tree->left);
+		result->left = build_flag(left_tree->left, right_tree->data);
 
-		result->right = build_flag(get_constant(left_tree->data), left_tree->right);
+		result->right = build_flag(left_tree->right, get_constant(left_tree->data));
 		return result;
 
 	}
@@ -55,7 +49,7 @@ tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 		result->data = left_tree->data;
 		result->left = get_great_tree(left_tree->left, right_tree->left);
 		result->right = get_great_tree(left_tree->right, right_tree->right);
-
+		return result;
 	}
 	else {				//Вершина покрывающего дерева — вершина одного из входных деревьев
 		/*4.2.1
@@ -99,7 +93,10 @@ tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 		size_t size3 = count(case43);
 		size_t size4 = count(case44);
 		
-		size_t s = find_min(find_min(size1, size2), find_min(size3, size4));
+		size_t s = size1;
+		if (size2 < s) s = size2;
+		if (size3 < s) s = size3;
+		if (size4 < s) s = size4;
 		
 		if (size1 == s) {
 			delete_tree(case41);
@@ -132,7 +129,7 @@ tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 tree * build_flag(const tree * root, string fData)
 {
 	tree * flag = new tree;
-	if (root->data == "read") {
+	if (operation_in_tree.find(root->data) == operation_in_tree.end()) {
 		flag->data = "flag";
 		flag->left = copy(root);
 		flag->right = new tree;
@@ -152,7 +149,7 @@ tree * build_flag(const tree * root, string fData)
 tree * build_flag(string fData, const tree * root)
 {
 	tree * flag = new tree;
-	if (root->data == "read") {
+	if (operation_in_tree.find(root->data) == operation_in_tree.end()) {
 		flag->data = "flag";
 		flag->right = copy(root);
 		flag->left = new tree;
@@ -174,6 +171,9 @@ string get_constant(string operation) {
 		return "1";
 	if (operation == "+")
 		return "0";
-	throw "Ошибка в создании флага. Неверная операция в корне дерева.";
+	if (operation == "read") {
+		return "read";
+	}
+	return operation;
 
 }

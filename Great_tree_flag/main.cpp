@@ -1,21 +1,16 @@
-#include <iostream>
-#include <fstream>
-#include <ctime>  // библиотека для работы со временем
 #include "main_menu.h"
-
-using namespace std;
-
 int main(int argc, char* argv[])
 {
 	setlocale(LC_ALL, "Russian");
+
 	try
 	{
-		no_data();
+		data();
 
 		/*
 		if (argc < 3)
 
-		no_data();
+		data();
 
 		else
 		{
@@ -42,7 +37,7 @@ int main(int argc, char* argv[])
 	catch (const exception &e) {
 		cerr << "Непредвиденная ошибка: " << e.what() << endl;
 	}
-	_CrtDumpMemoryLeaks();
+	//_CrtDumpMemoryLeaks();
 	system("pause");
 	return 0;
 }

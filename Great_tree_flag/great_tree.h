@@ -27,3 +27,5 @@ tree * build_flag(string fData, const tree *root);
 
 //Вспомогательная функция выбора подходящей констан
 string get_constant(string operation);
+
+//size_t find_min(size_t a, size_t b) { if (a < b) return a; return b; }

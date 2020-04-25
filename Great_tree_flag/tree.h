@@ -1,12 +1,11 @@
 #pragma once
-#pragma once
-#pragma once
 //#include <stdlib.h>
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <stack>
 #include <cassert>
+#include <set>
 //#include "crtdynmem.h"
 using namespace std;
 
@@ -20,6 +19,8 @@ struct tree
 	tree *left;
 	tree *right;
 };
+
+const set <string> operation_in_tree{"+","*"};
 
 // Функция создания дерева.
 // Данные вводятся из файла.
@@ -103,4 +104,7 @@ void leaves_maker(tree *&root, const string mark, size_t count = 0);
 // Функция перевода числа в строку
 string int_to_string(size_t a);
 
-size_t find_min(size_t a, size_t b) { if (a < b) return a; return b; }
+
+//Дополнительная функция для тестирования
+//Добавляет к листьям дерева строку р
+void change_tree(tree *&root, string p);
