@@ -22,25 +22,18 @@ tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 	if (operation_in_tree.find(left_tree->data) == operation_in_tree.end()) {
 		tree * result = new tree;
 		result->data = right_tree->data;
-
 		result->left = build_flag(left_tree->data, right_tree->left);
-
 		result->right = build_flag(get_constant(right_tree->data), right_tree->right);
 		return result;
-
-		throw "ќшибка в создании флага. Ќеверна€ операци€ в корне дерева.";
 	}
 
 	//операци€	чтение
 	if (operation_in_tree.find(right_tree->data) == operation_in_tree.end()) {
 		tree * result = new tree;
 		result->data = left_tree->data;
-
 		result->left = build_flag(left_tree->left, right_tree->data);
-
 		result->right = build_flag(left_tree->right, get_constant(left_tree->data));
 		return result;
-
 	}
 
 	//операци€	операци€
@@ -59,7 +52,7 @@ tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 		tree * case41 = new tree;
 		case41->data = right_tree->data;
 		case41->right = get_great_tree(left_tree, right_tree->right);
-		case41->left = build_flag(get_constant(right_tree->data), right_tree->left);
+		case41->left = build_flag(get_constant(left_tree->data), right_tree->left);
 
 		/*	4.2.2
 				ѕравое поддерево Ч покрывающее дерево дл€ правой ветви первого дерева и дерева,
@@ -67,7 +60,7 @@ tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 				Ћевое поддерево Ч покрывающее дерево дл€ левой ветви первого дерева и второго дерева.*/
 		tree * case42 = new tree;
 		case42->data = right_tree->data;
-		case42->right = build_flag(get_constant(right_tree->data), right_tree->right);
+		case42->right = build_flag(get_constant(left_tree->data), right_tree->right);
 		case42->left = get_great_tree(left_tree, right_tree->left);
 
 		/*	4.2.3
@@ -77,7 +70,7 @@ tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 		tree * case43 = new tree;
 		case43->data = left_tree->data;
 		case43->right = get_great_tree(left_tree->left, right_tree);
-		case43->left = build_flag(left_tree->right, get_constant(left_tree->data));
+		case43->left = build_flag(left_tree->right, get_constant(right_tree->data));
 
 		/*	4.2.4
 				ѕравое поддерево Ч покрывающее дерево дл€ правой ветви первого дерева и дерева,
@@ -85,7 +78,7 @@ tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 				Ћевое поддерево Ч покрывающее дерево дл€ левой ветви первого дерева и второго дерева.*/
 		tree * case44 = new tree;
 		case44->data = left_tree->data;
-		case44->right = build_flag(left_tree->left, get_constant(left_tree->data));
+		case44->right = build_flag(left_tree->left, get_constant(right_tree->data));
 		case44->left = get_great_tree(left_tree->right, right_tree); 
 
 		size_t size1 = count(case41);
@@ -99,7 +92,6 @@ tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 		if (size4 < s) s = size4;
 		
 		if (size1 == s) {
-			delete_tree(case41);
 			delete_tree(case42);
 			delete_tree(case43);
 			delete_tree(case44);
@@ -151,11 +143,11 @@ tree * build_flag(string fData, const tree * root)
 	tree * flag = new tree;
 	if (operation_in_tree.find(root->data) == operation_in_tree.end()) {
 		flag->data = "flag";
-		flag->right = copy(root);
-		flag->left = new tree;
-		flag->left->data = fData;
-		flag->left->left = nullptr;
-		flag->left->right = nullptr;
+		flag->left = copy(root);
+		flag->right = new tree;
+		flag->right->data = fData;
+		flag->right->left = nullptr;
+		flag->right->right = nullptr;
 		return flag;
 	}
 

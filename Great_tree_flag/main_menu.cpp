@@ -72,7 +72,7 @@ void data() {
 	double seconds = double(stop - start) / CLOCKS_PER_SEC;
 	if (tree_size_first + tree_size_second <= 50)
 	{
-	cout << "result" << endl;
+	cout << "result :" << endl;
 	print_tree(result);
 	}
 
@@ -91,6 +91,27 @@ void data() {
 	delete_tree(first_tree);
 	delete_tree(second_tree);
 	delete_tree(result);
+}
+
+void data(int size_first, int size_second)
+{
+		tree *first_tree = random_tree(size_first);
+		change_tree(first_tree, "1");
+		tree *second_tree = random_tree(size_second);
+		change_tree(second_tree, "2");
+		tree *result = new tree;
+		//начало отсчета времени
+		clock_t start = clock();
+		result = get_great_tree(first_tree, second_tree);
+		// конец отсчета времени
+		clock_t stop = clock();
+		// количество секунд
+		double seconds = double(stop - start) / CLOCKS_PER_SEC;
+		cout << seconds << endl;
+		
+		delete_tree(first_tree);
+		delete_tree(second_tree);
+		delete_tree(result);
 }
 
 
