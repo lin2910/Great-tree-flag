@@ -1,5 +1,6 @@
 #include "main_menu.h"
 #include "tree.h"
+#include "crtdynmem.h"
 
 
 int main(int argc, char* argv[])
@@ -26,30 +27,30 @@ int main(int argc, char* argv[])
 		//data();
 
 		//замеры времени
-		for (size_t i = 0; i < 20; i++)
-		{
-			data(30, 30);
-		}
-
-
+		
+		//	for (size_t i = 0; i < 20; i++)
+		//	{
+		//		data(30, 30);
+		//	}
+		
 		//основная раброта
-		/*
+		
 		if (argc < 3)
 
 		data();
 
 		else
 		{
-		if (argc >= 4)
-		if (argc >= 5)
-		data(argv[1], argv[2], argv[3], argv[4]);
-		else
-		data(argv[1], argv[2], argv[3]);
+			if (argc >= 4)
+				if (argc >= 5)
+					data(argv[1], argv[2], argv[3], argv[4]);
+				else
+					data(argv[1], argv[2], argv[3]);
 
-		else
-		data(argv[1], argv[2]);
+			else
+				data(argv[1], argv[2]);
 		}
-		*/
+		
 	}
 	catch (const ios_base::failure &e) {
 		cerr << "Некорректный ввод: " << e.what() << endl;
@@ -63,7 +64,7 @@ int main(int argc, char* argv[])
 	catch (const exception &e) {
 		cerr << "Непредвиденная ошибка: " << e.what() << endl;
 	}
-	//_CrtDumpMemoryLeaks();
+	_CrtDumpMemoryLeaks(); 
 	system("pause");
 	return 0;
 }

@@ -86,11 +86,13 @@ tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 		size_t size3 = count(case43);
 		size_t size4 = count(case44);
 		
+		// Выбор лучшей ветви
 		size_t s = size1;
 		if (size2 < s) s = size2;
 		if (size3 < s) s = size3;
 		if (size4 < s) s = size4;
 		
+		// Удаление лишних деревьев и возвращение результата
 		if (size1 == s) {
 			delete_tree(case42);
 			delete_tree(case43);
@@ -121,6 +123,8 @@ tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 tree * build_flag(const tree * root, string fData)
 {
 	tree * flag = new tree;
+
+	//дошли до конца дерева
 	if (operation_in_tree.find(root->data) == operation_in_tree.end()) {
 		flag->data = "flag";
 		flag->left = copy(root);
@@ -130,7 +134,7 @@ tree * build_flag(const tree * root, string fData)
 		flag->right->right = nullptr;
 		return flag;
 	}
-
+	//не дошли определения флага - рекурсивный вызов
 	flag->data = root->data;
 
 	flag->left = build_flag(root->left, fData);
@@ -143,11 +147,11 @@ tree * build_flag(string fData, const tree * root)
 	tree * flag = new tree;
 	if (operation_in_tree.find(root->data) == operation_in_tree.end()) {
 		flag->data = "flag";
-		flag->left = copy(root);
-		flag->right = new tree;
-		flag->right->data = fData;
-		flag->right->left = nullptr;
-		flag->right->right = nullptr;
+		flag->right = copy(root);
+		flag->left = new tree;
+		flag->left->data = fData;
+		flag->left->left = nullptr;
+		flag->left->right = nullptr;
 		return flag;
 	}
 

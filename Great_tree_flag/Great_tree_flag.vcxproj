@@ -117,6 +117,7 @@
     <ClCompile Include="tree.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="crtdynmem.h" />
     <ClInclude Include="great_tree.h" />
     <ClInclude Include="main_menu.h" />
     <ClInclude Include="tree.h" />
