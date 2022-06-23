@@ -1,27 +1,25 @@
 #pragma once
 #include "main_menu.h"
 
-
 using namespace std;
 
 void no_data()
 {
-
 	//	size_t tree_size_first, tree_size_second;
-	cout << "Êîíñòàíòíûé ââîä." << endl;
+	cout << "ÐšÐ¾Ð½ÑÑ‚Ð°Ð½Ñ‚Ð½Ñ‹Ð¹ Ð²Ð²Ð¾Ð´." << endl;
 
 	tree *first_tree = get_tree_from_file("first_tree_to_read");
 	tree *second_tree = get_tree_from_file("second_tree_to_read");
 	tree *result = new tree;
 
-	//íà÷àëî îòñ÷åòà âðåìåíè
+	//Ð½Ð°Ñ‡Ð°Ð»Ð¾ Ð¾Ñ‚ÑÑ‡ÐµÑ‚Ð° Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸
 	clock_t start = clock();
 	result = get_great_tree(first_tree, second_tree);
 
-	// êîíåö îòñ÷åòà âðåìåíè
+	// ÐºÐ¾Ð½ÐµÑ† Ð¾Ñ‚ÑÑ‡ÐµÑ‚Ð° vÐ²Ñ€ÐµÐ¼ÐµÐ½Ð¸
 	clock_t stop = clock();
 
-	// êîëè÷åñòâî ñåêóíä
+	// ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐµÐºÑƒÐ½Ð´
 	double seconds = double(stop - start) / CLOCKS_PER_SEC;
 
 	cout << endl << "time : " << seconds << endl;
@@ -38,19 +36,19 @@ void no_data()
 
 void data() {
 	size_t tree_size_first, tree_size_second;
-	cout << "Íå ââåäåíû íà÷àëüíûå äàííûå äàííûå." << endl <<
-		"Ââåäèòå êîëè÷åñòâî âåðøèí äëÿ ñîçäàíèÿ äåðåâà : ";
+	cout << "ÐÐµ Ð²Ð²ÐµÐ´ÐµÐ½Ñ‹ Ð½Ð°Ñ‡Ð°Ð»ÑŒÐ½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ." << endl <<
+		"Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð²ÐµÑ€ÑˆÐ¸Ð½ Ð´Ð»Ñ ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ñ Ð´ÐµÑ€ÐµÐ²Ð° : ";
 	cin >> tree_size_first;
 	if (tree_size_first < 1)
-		throw domain_error("Íåïðàâèëüíî çàäàí ðàçìåð ïåðâîãî äåðåâà");
+		throw domain_error("ÐÐµÐ¿Ñ€Ð°Ð²Ð¸Ð»ÑŒÐ½Ð¾ Ð·Ð°Ð´Ð°Ð½ Ñ€Ð°Ð·Ð¼ÐµÑ€ Ð¿ÐµÑ€Ð²Ð¾Ð³Ð¾ Ð´ÐµÑ€ÐµÐ²Ð°");
 	tree *first_tree = random_tree(tree_size_first);
 	change_tree(first_tree, "1");
 	//print_tree("first_tree.txt", first_tree);
 	//print_tree_to_read("first_tree_to_read.txt", first_tree);
-	cout << "Ââåäèòå êîëè÷åñòâî âåðøèí äëÿ ñîçäàíèÿ äåðåâà : ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð²ÐµÑ€ÑˆÐ¸Ð½ Ð´Ð»Ñ ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ñ Ð´ÐµÑ€ÐµÐ²Ð° : ";
 	cin >> tree_size_second;
 	if (tree_size_second < 1)
-		throw domain_error("Íåïðàâèëüíî çàäàí ðàçìåð âòîðîãî äåðåâà");
+		throw domain_error("ÐÐµÐ¿Ñ€Ð°Ð²Ð¸Ð»ÑŒÐ½Ð¾ Ð·Ð°Ð´Ð°Ð½ Ñ€Ð°Ð·Ð¼ÐµÑ€ Ð²Ñ‚Ð¾Ñ€Ð¾Ð³Ð¾ Ð´ÐµÑ€ÐµÐ²Ð°");
 	tree *second_tree = random_tree(tree_size_second);
 	change_tree(second_tree, "2");
 	//print_tree("second_tree.txt", second_tree);
@@ -64,12 +62,12 @@ void data() {
 	}
 
 	tree *result = new tree;
-	//íà÷àëî îòñ÷åòà âðåìåíè
+	//Ð½Ð°Ñ‡Ð°Ð»Ð¾ Ð¾Ñ‚ÑÑ‡ÐµÑ‚Ð° Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸
 	clock_t start = clock();
 	result = get_great_tree(first_tree, second_tree);
-	// êîíåö îòñ÷åòà âðåìåíè
+	// ÐºÐ¾Ð½ÐµÑ† Ð¾Ñ‚ÑÑ‡ÐµÑ‚Ð° Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸
 	clock_t stop = clock();
-	// êîëè÷åñòâî ñåêóíä
+	// ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐµÐºÑƒÐ½Ð´
 	double seconds = double(stop - start) / CLOCKS_PER_SEC;
 	if (tree_size_first + tree_size_second <= 50)
 	{
@@ -99,12 +97,12 @@ void data(int size_first, int size_second)
 		tree *second_tree = random_tree(size_second);
 		change_tree(second_tree, "2");
 		tree *result = new tree;
-		//íà÷àëî îòñ÷åòà âðåìåíè
+		//Ð½Ð°Ñ‡Ð°Ð»Ð¾ Ð¾Ñ‚ÑÑ‡ÐµÑ‚Ð° Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸
 		clock_t start = clock();
 		result = get_great_tree(first_tree, second_tree);
-		// êîíåö îòñ÷åòà âðåìåíè
+		// ÐºÐ¾Ð½ÐµÑ† Ð¾Ñ‚ÑÑ‡ÐµÑ‚Ð° Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸
 		clock_t stop = clock();
-		// êîëè÷åñòâî ñåêóíä
+		// ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐµÐºÑƒÐ½Ð´
 		double seconds = double(stop - start) / CLOCKS_PER_SEC;
 		cout << seconds << endl;
 		cout << count(first_tree) << endl;
@@ -122,12 +120,12 @@ double data(int size_first, int size_second, char c)
 	tree *second_tree = random_tree(size_second);
 	change_tree(second_tree, "2");
 	tree *result = new tree;
-	//íà÷àëî îòñ÷åòà âðåìåíè
+	//Ð½Ð°Ñ‡Ð°Ð»Ð¾ Ð¾Ñ‚ÑÑ‡ÐµÑ‚Ð° Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸
 	clock_t start = clock();
 	result = get_great_tree(first_tree, second_tree);
-	// êîíåö îòñ÷åòà âðåìåíè
+	// ÐºÐ¾Ð½ÐµÑ† Ð¾Ñ‚ÑÑ‡ÐµÑ‚Ð° Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸
 	clock_t stop = clock();
-	// êîëè÷åñòâî ñåêóíä
+	// ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐµÐºÑƒÐ½Ð´
 	double seconds = double(stop - start) / CLOCKS_PER_SEC;
 	//cout << seconds << endl;
 	//cout << count(first_tree) << endl;
@@ -149,14 +147,14 @@ void data(char arg1[], char arg2[], char arg3[], char arg4[]) {
 	tree *result = new tree;
 
 	cout << "result" << endl;
-	//íà÷àëî îòñ÷åòà âðåìåíè
+	//Ð½Ð°Ñ‡Ð°Ð»Ð¾ Ð¾Ñ‚ÑÑ‡ÐµÑ‚Ð° Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸
 	clock_t start = clock();
 	result = get_great_tree(first_tree, second_tree);
 
-	// êîíåö îòñ÷åòà âðåìåíè
+	// ÐºÐ¾Ð½ÐµÑ† Ð¾Ñ‚ÑÑ‡ÐµÑ‚Ð° Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸
 	clock_t stop = clock();
 	print_tree(result);
-	// êîëè÷åñòâî ñåêóíä
+	// ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐµÐºÑƒÐ½Ð´
 	double seconds = double(stop - start) / CLOCKS_PER_SEC;
 
 	cout << "time : " << seconds << endl;
@@ -185,14 +183,14 @@ void data(char arg1[], char arg2[], char arg3[]) {
 	tree *result = new tree;
 
 	cout << "result" << endl;
-	//íà÷àëî îòñ÷åòà âðåìåíè
+	//Ð½Ð°Ñ‡Ð°Ð»Ð¾ Ð¾Ñ‚ÑÑ‡ÐµÑ‚Ð° Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸
 	clock_t start = clock();
 	result = get_great_tree(first_tree, second_tree);
 
-	// êîíåö îòñ÷åòà âðåìåíè
+	// ÐºÐ¾Ð½ÐµÑ† Ð¾Ñ‚ÑÑ‡ÐµÑ‚Ð° Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸
 	clock_t stop = clock();
 	print_tree(result);
-	// êîëè÷åñòâî ñåêóíä
+	// ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐµÐºÑƒÐ½Ð´
 	double seconds = double(stop - start) / CLOCKS_PER_SEC;
 
 	cout << "time : " << seconds << endl;
@@ -218,14 +216,14 @@ void data(char arg1[], char arg2[]) {
 	tree *result = new tree;
 
 	cout << "result" << endl;
-	//íà÷àëî îòñ÷åòà âðåìåíè
+	//Ð½Ð°Ñ‡Ð°Ð»Ð¾ Ð¾Ñ‚ÑÑ‡ÐµÑ‚Ð° Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸
 	clock_t start = clock();
 	result = get_great_tree(first_tree, second_tree);
 
-	// êîíåö îòñ÷åòà âðåìåíè
+	// ÐºÐ¾Ð½ÐµÑ† Ð¾Ñ‚ÑÑ‡ÐµÑ‚Ð° Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸
 	clock_t stop = clock();
 	print_tree(result);
-	// êîëè÷åñòâî ñåêóíä
+	// ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐµÐºÑƒÐ½Ð´
 	double seconds = double(stop - start) / CLOCKS_PER_SEC;
 
 	cout << "time : " << seconds << endl;
