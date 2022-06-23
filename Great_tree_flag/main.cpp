@@ -2,7 +2,6 @@
 #include "tree.h"
 #include "crtdynmem.h"
 
-
 int main(int argc, char* argv[])
 {
 	setlocale(LC_ALL, "Russian");
@@ -27,16 +26,16 @@ int main(int argc, char* argv[])
 		
 	}
 	catch (const ios_base::failure &e) {
-		cerr << "Íåêîððåêòíûé ââîä: " << e.what() << endl;
+		cerr << "ÐÐµÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ñ‹Ð¹ Ð²Ð²Ð¾Ð´: " << e.what() << endl;
 	}
 	catch (const domain_error &e) {
-		cerr << "Íåâåðíîå çíà÷åíèå ïàðàìåòðà: " << e.what() << endl;
+		cerr << "ÐÐµÐ²ÐµÑ€Ð½Ð¾Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð°: " << e.what() << endl;
 	}
 	catch (const out_of_range &e) {
-		cerr << "Èíäåêñ íàõîäèòñÿ âíå ãðàíèö: " << e.what() << endl;
+		cerr << "Ð˜Ð½Ð´ÐµÐºÑ Ð½Ð°Ñ…Ð¾Ð´Ð¸Ñ‚ÑÑ Ð²Ð½Ðµ Ð³Ñ€Ð°Ð½Ð¸Ñ†: " << e.what() << endl;
 	}
 	catch (const exception &e) {
-		cerr << "Íåïðåäâèäåííàÿ îøèáêà: " << e.what() << endl;
+		cerr << "ÐÐµÐ¿Ñ€ÐµÐ´Ð²Ð¸Ð´ÐµÐ½Ð½Ð°Ñ Ð¾ÑˆÐ¸Ð±ÐºÐ°: " << e.what() << endl;
 	}
 	
 	//_CrtDumpMemoryLeaks(); 
