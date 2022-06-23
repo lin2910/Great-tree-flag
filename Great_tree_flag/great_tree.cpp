@@ -23,6 +23,7 @@ tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 		tree * result = new tree;
 		result->data = right_tree->data;
 		result->left = build_flag(left_tree->data, right_tree->left);
+		//print_tree(right_tree);
 		result->right = build_flag(get_constant(right_tree->data), right_tree->right);
 		return result;
 	}
@@ -32,6 +33,7 @@ tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 		tree * result = new tree;
 		result->data = left_tree->data;
 		result->left = build_flag(left_tree->left, right_tree->data);
+		//print_tree(left_tree);
 		result->right = build_flag(left_tree->right, get_constant(left_tree->data));
 		return result;
 	}
@@ -52,7 +54,8 @@ tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 		tree * case41 = new tree;
 		case41->data = right_tree->data;
 		case41->right = get_great_tree(left_tree, right_tree->right);
-		case41->left = build_flag(get_constant(left_tree->data), right_tree->left);
+		//print_tree(left_tree);
+		case41->left = build_flag(get_constant(right_tree->data), right_tree->left);
 
 		/*	4.2.2
 				ѕравое поддерево Ч покрывающее дерево дл€ правой ветви первого дерева и дерева,
@@ -60,7 +63,8 @@ tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 				Ћевое поддерево Ч покрывающее дерево дл€ левой ветви первого дерева и второго дерева.*/
 		tree * case42 = new tree;
 		case42->data = right_tree->data;
-		case42->right = build_flag(get_constant(left_tree->data), right_tree->right);
+		//print_tree(left_tree);
+		case42->right = build_flag(get_constant(right_tree->data), right_tree->right);
 		case42->left = get_great_tree(left_tree, right_tree->left);
 
 		/*	4.2.3
@@ -69,8 +73,9 @@ tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 					состо€щей из одной операции чтени€ данных, содержащую соответствующую константу.*/
 		tree * case43 = new tree;
 		case43->data = left_tree->data;
-		case43->right = get_great_tree(left_tree->left, right_tree);
-		case43->left = build_flag(left_tree->right, get_constant(right_tree->data));
+		case43->right = get_great_tree(left_tree->right, right_tree);
+		//print_tree(right_tree);
+		case43->left = build_flag(left_tree->left, get_constant(left_tree->data));
 
 		/*	4.2.4
 				ѕравое поддерево Ч покрывающее дерево дл€ правой ветви первого дерева и дерева,
@@ -78,8 +83,9 @@ tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 				Ћевое поддерево Ч покрывающее дерево дл€ левой ветви первого дерева и второго дерева.*/
 		tree * case44 = new tree;
 		case44->data = left_tree->data;
-		case44->right = build_flag(left_tree->left, get_constant(right_tree->data));
-		case44->left = get_great_tree(left_tree->right, right_tree); 
+		//print_tree(right_tree);
+		case44->right = build_flag(left_tree->right, get_constant(left_tree->data));
+		case44->left = get_great_tree(left_tree->left, right_tree); 
 
 		size_t size1 = count(case41);
 		size_t size2 = count(case42);
@@ -111,7 +117,8 @@ tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 			delete_tree(case44);
 			return case43;
 		}
-		if (size4 == s) {
+		//if (size4 == s) 
+		{
 			delete_tree(case41);
 			delete_tree(case42);
 			delete_tree(case43);
@@ -122,6 +129,9 @@ tree * get_great_tree(const tree * left_tree, const tree * right_tree)
 
 tree * build_flag(const tree * root, string fData)
 {
+	//print_tree(root);
+
+
 	tree * flag = new tree;
 
 	//дошли до конца дерева
@@ -144,6 +154,8 @@ tree * build_flag(const tree * root, string fData)
 
 tree * build_flag(string fData, const tree * root)
 {
+	//print_tree(root);
+
 	tree * flag = new tree;
 	if (operation_in_tree.find(root->data) == operation_in_tree.end()) {
 		flag->data = "flag";
@@ -163,13 +175,23 @@ tree * build_flag(string fData, const tree * root)
 }
 
 string get_constant(string operation) {
-	if (operation == "*")
+	if (operation_in_tree.find(operation) == operation_in_tree.end()) {
+	//	cout << "Operation not in list " << operation << endl;
+		return operation; // ¬озврат имени переменной
+
+	}
+	if (operation == "*") {
+	//	cout << "Operation *" << endl;
 		return "1";
-	if (operation == "+")
+	}
+	if (operation == "+") {
+	//	cout << "Operation +" << endl;
 		return "0";
+	}
 	if (operation == "read") {
+	//	cout << "Operation read: " << operation << endl;
 		return "read";
 	}
-	return operation;
+
 
 }

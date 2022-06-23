@@ -9,32 +9,6 @@ int main(int argc, char* argv[])
 
 	try
 	{
-		//тестирование
-		/*
-		tree *test = random_tree(5);
-		print_tree(test);
-
-		tree * tesf_with_flag;
-		cout << endl <<  endl << endl << endl;
-		cout << get_constant(test->data);
-		cout << endl <<  endl << endl;
-
-		tesf_with_flag = build_flag( get_constant(test->data), test);
-		print_tree(tesf_with_flag);
-		*/
-		
-		//отладка
-		//data();
-
-		//замеры времени
-		
-		//	for (size_t i = 0; i < 20; i++)
-		//	{
-		//		data(30, 30);
-		//	}
-		
-		//основная раброта
-		
 		if (argc < 3)
 
 		data();
@@ -64,7 +38,8 @@ int main(int argc, char* argv[])
 	catch (const exception &e) {
 		cerr << "Непредвиденная ошибка: " << e.what() << endl;
 	}
-	_CrtDumpMemoryLeaks(); 
+	
+	//_CrtDumpMemoryLeaks(); 
 	system("pause");
 	return 0;
 }

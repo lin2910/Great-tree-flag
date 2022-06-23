@@ -20,6 +20,7 @@ struct tree
 	tree *right;
 };
 
+// Множество операций, которые могут быть в дереве
 const set <string> operation_in_tree{"+","*"};
 
 // Функция создания дерева.

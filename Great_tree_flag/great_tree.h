@@ -25,7 +25,7 @@ tree * build_flag(const tree *root, string fData);
 //В данной расскладке значение fData принимается на левый переключатель (первый)
 tree * build_flag(string fData, const tree *root);
 
-//Вспомогательная функция выбора подходящей констан
+//Вспомогательная функция выбора подходящей константы
 string get_constant(string operation);
 
 //size_t find_min(size_t a, size_t b) { if (a < b) return a; return b; }

@@ -6,13 +6,12 @@ tree *get_tree_from_file(const char * filename)
 	ifstream fin(filename);
 	if (!fin.is_open()) throw "Не найден указанный файл";
 
-	tree *root;
+	tree *root = new tree;
 	string x;
-	tree *pt = new tree;
-	fin >> pt->data;
-	pt->left = nullptr;
-	pt->right = nullptr;
-	root = pt;
+	fin >> x;
+	root->data = x;
+	root->left = nullptr;
+	root->right = nullptr;
 	while (fin >> x)
 	{
 		tree *p = new tree;
@@ -141,6 +140,8 @@ size_t count(const tree *root)
 {
 	if (!root) return 0;
 	if (!root->left && !root->right)
+		return 1;
+	if (root->data == "flag")
 		return 1;
 	return 1 + count(root->left) + count(root->right);
 }

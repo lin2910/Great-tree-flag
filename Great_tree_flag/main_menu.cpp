@@ -33,6 +33,7 @@ void no_data()
 	fout.close();
 	delete_tree(first_tree);
 	delete_tree(second_tree);
+	delete_tree(result);
 }
 
 void data() {
@@ -76,8 +77,6 @@ void data() {
 	print_tree(result);
 	}
 
-	
-
 	//print_tree_to_file("out.txt", result);
 	//print_tree_to_read("out_to_read.txt", result);
 	cout << endl << "time : " << seconds << endl;
@@ -108,13 +107,37 @@ void data(int size_first, int size_second)
 		// количество секунд
 		double seconds = double(stop - start) / CLOCKS_PER_SEC;
 		cout << seconds << endl;
-		
+		cout << count(first_tree) << endl;
+		cout << count(second_tree) << endl;
+		cout << count(result) << endl;
 		delete_tree(first_tree);
 		delete_tree(second_tree);
 		delete_tree(result);
 }
 
-
+double data(int size_first, int size_second, char c)
+{
+	tree *first_tree = random_tree(size_first);
+	change_tree(first_tree, "1");
+	tree *second_tree = random_tree(size_second);
+	change_tree(second_tree, "2");
+	tree *result = new tree;
+	//начало отсчета времени
+	clock_t start = clock();
+	result = get_great_tree(first_tree, second_tree);
+	// конец отсчета времени
+	clock_t stop = clock();
+	// количество секунд
+	double seconds = double(stop - start) / CLOCKS_PER_SEC;
+	//cout << seconds << endl;
+	//cout << count(first_tree) << endl;
+	//cout << count(second_tree) << endl;
+	//cout << count(result) << endl;
+	delete_tree(first_tree);
+	delete_tree(second_tree);
+	delete_tree(result);
+	return seconds;
+}
 
 void data(char arg1[], char arg2[], char arg3[], char arg4[]) {
 	tree *first_tree = get_tree_from_file(arg1);
@@ -149,6 +172,7 @@ void data(char arg1[], char arg2[], char arg3[], char arg4[]) {
 
 	delete_tree(first_tree);
 	delete_tree(second_tree);
+	delete_tree(result);
 }
 
 void data(char arg1[], char arg2[], char arg3[]) {
@@ -181,6 +205,7 @@ void data(char arg1[], char arg2[], char arg3[]) {
 	fout.close();
 	delete_tree(first_tree);
 	delete_tree(second_tree);
+	delete_tree(result);
 }
 
 void data(char arg1[], char arg2[]) {
@@ -213,4 +238,5 @@ void data(char arg1[], char arg2[]) {
 	fout.close();
 	delete_tree(first_tree);
 	delete_tree(second_tree);
+	delete_tree(result);
 }
